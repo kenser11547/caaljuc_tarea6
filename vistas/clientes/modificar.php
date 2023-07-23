@@ -19,7 +19,7 @@ require '../../modelos/Cliente.php';
     <div class="container">
         <h1 class="text-center">Modificar Clientes</h1>
         <div class="row justify-content-center">
-            <form action="/caaljuc_tarea6/controladores/productos/modificar.php" method="POST" class="col-lg-8 border bg-light p-3">
+            <form action="/caaljuc_tarea6/controladores/clientes/modificar.php" method="POST" class="col-lg-8 border bg-light p-3">
                 <input type="hidden" name="cliente_id" value="<?= $clientes[0]['CLIENTE_ID'] ?>" >
                 <div class="row mb-3">
                     <div class="col">
