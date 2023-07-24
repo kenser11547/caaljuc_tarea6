@@ -2,6 +2,7 @@ const formulario = document.querySelector('form')
 const tablaProductos = document.getElementById('tablaProductos');
 const btnBuscar = document.getElementById('btnBuscar');
 const btnModificar = document.getElementById('btnModificar');
+const btnEliminar = document.getElementById('btnEliminar');
 const btnGuardar = document.getElementById('btnGuardar');
 const btnCancelar = document.getElementById('btnCancelar');
 const divTabla = document.getElementById('divTabla');
@@ -103,7 +104,46 @@ const modificar = async (evento) => {
         console.log(error);
     }
 }
+const eliminar = async (cliente_id) => {
+    const confirmacion = confirm("¿Estás seguro de que deseas eliminar este registro?");
+    if (!confirmacion) {
+        return;
+    }
 
+    const url = `/caaljuc_tarea6/controladores/clientes/index.php`;
+    const body = new FormData();
+    body.append('cliente_id', cliente_id);
+    body.append('tipo', 3); // Establece 'tipo' como 3 para la solicitud de eliminar
+
+    const config = {
+        method: 'POST', // Debe ser 'POST' para la solicitud de eliminar
+        body,
+    };
+
+    try {
+        const respuesta = await fetch(url, config);
+        const data = await respuesta.json();
+
+        const { codigo, mensaje } = data;
+
+        switch (codigo) {
+            case 1:
+                // Eliminación exitosa, actualizamos la tabla
+                const row = tablaProductos.tBodies[0].querySelector(`[data-cliente-id="${cliente_id}"]`);
+                tablaProductos.tBodies[0].removeChild(row);
+                break;
+            case 0:
+                console.log(mensaje);
+                break;
+            default:
+                break;
+        }
+
+        alert(mensaje);
+    } catch (error) {
+        console.log(error);
+    }
+};
 const buscar = async () => {
 
     let cliente_nombre = formulario.cliente_nombre.value;
@@ -204,15 +244,15 @@ const cancelarAccion = () => {
 }
 
 
-const eliminar = (id) => {
-    if(confirm("¿Desea eliminar este producto?")){
-        alert("eliminando")
-    }
-}
+
+
+
+
 
 
 buscar();
 btnGuardar.addEventListener('click', guardar);
 btnModificar.addEventListener('click', modificar);
-btnBuscar.addEventListener('click', buscar)
-btnCancelar.addEventListener('click', cancelarAccion)
+btnEliminar.addEventListener('click', eliminar);
+btnBuscar.addEventListener('click', buscar);
+btnCancelar.addEventListener('click', cancelarAccion);
