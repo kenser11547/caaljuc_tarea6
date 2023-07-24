@@ -212,7 +212,7 @@ const eliminar = (id) => {
 
 
 buscar();
-
-formulario.addEventListener('submit', guardar )
+btnGuardar.addEventListener('click', guardar);
+btnModificar.addEventListener('click', modificar);
 btnBuscar.addEventListener('click', buscar)
 btnCancelar.addEventListener('click', cancelarAccion)
