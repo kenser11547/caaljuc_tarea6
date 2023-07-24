@@ -22,10 +22,10 @@
                         <button type="submit" id="btnGuardar" class="btn btn-primary w-100">Guardar</button>
                     </div>
                     <div class="col">
-                        <button type="button" id="btnModificar" class="btn btn-warning w-100">Modificar</button>
+                        <button type="submit" id="btnModificar" class="btn btn-warning w-100">Modificar</button>
                     </div>
                     <div class="col">
-                        <button type="button" id="btnBuscar" class="btn btn-info w-100">Buscar</button>
+                        <button type="submit" id="btnBuscar" class="btn btn-info w-100">Buscar</button>
                     </div>
                     <div class="col">
                         <button type="button" id="btnCancelar" class="btn btn-danger w-100">Cancelar</button>
@@ -53,5 +53,5 @@
         </div>
     </div>
     <script src="../../src/js/funciones.js"></script>
-    <script src="../../src/js/productos/index.js"></script>
+    <script src="../../src/js/clientes/index.js"></script>
 <?php include_once '../../includes/footer.php'?>
