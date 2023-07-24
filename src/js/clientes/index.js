@@ -181,9 +181,10 @@ const buscar = async () => {
         tablaClientes.tBodies[0].innerHTML = ''
         const fragment = document.createDocumentFragment();
         console.log(data);
+
         if(data.length > 0){
             let contador = 1;
-            data.forEach( cliente => {
+            data.forEach(cliente => {
                 // CREAMOS ELEMENTOS
                 const tr = document.createElement('tr');
                 const td1 = document.createElement('td')
@@ -267,8 +268,8 @@ const cancelarAccion = () => {
 
 buscar();
 
-btnGuardar.addEventListener('click', guardar);
-btnModificar.addEventListener('click', modificar);
-btnEliminar.addEventListener('click', eliminar);
+formulario.addEventListener('submit', guardar);
 btnBuscar.addEventListener('click', buscar);
 btnCancelar.addEventListener('click', cancelarAccion);
+btnModificar.addEventListener('click', modificar);
+btnEliminar.addEventListener('click', eliminar);
