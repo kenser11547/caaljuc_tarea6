@@ -75,24 +75,18 @@ const modificar = async (evento) => {
         const respuesta = await fetch(url, config);
         const data = await respuesta.json();
 
-        const { codigo, mensaje, detalle, cliente_actualizado } = data;
+        const { codigo, mensaje, detalle} = data;
 
         switch (codigo) {
             case 1:
-                if (cliente_actualizado) {
-                    const row = tablaProductos.tBodies[0].querySelector(`[data-cliente-id="${cliente_id}"]`);
-                    const tds = row.querySelectorAll('td');
-                    tds[1].innerText = formulario.cliente_nombre.value;
-                    tds[2].innerText = formulario.cliente_nit.value;
-                }
-
                 formulario.reset();
+                buscar();
                 break;
-
+        
             case 0:
-                console.log(detalle);
+                console.log(detalle)
                 break;
-
+        
             default:
                 break;
         }
@@ -124,17 +118,18 @@ const eliminar = async (cliente_id) => {
         const respuesta = await fetch(url, config);
         const data = await respuesta.json();
 
-        const { codigo, mensaje } = data;
+        const { codigo, mensaje, detalle } = data;
 
         switch (codigo) {
             case 1:
-                // Eliminación exitosa, actualizamos la tabla
-                const row = tablaProductos.tBodies[0].querySelector(`[data-cliente-id="${cliente_id}"]`);
-                tablaProductos.tBodies[0].removeChild(row);
+                formulario.reset();
+                buscar();
                 break;
+        
             case 0:
-                console.log(mensaje);
+                console.log(detalle)
                 break;
+        
             default:
                 break;
         }

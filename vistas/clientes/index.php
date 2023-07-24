@@ -28,7 +28,7 @@
                         <button type="submit" id="btnBuscar" class="btn btn-info w-100">Buscar</button>
                     </div>
                     <div class="col">
-                        <button type="button" id="btnCancelar" class="btn btn-danger w-100">Cancelar</button>
+                        <button type="submit" id="btnCancelar" class="btn btn-danger w-100">Cancelar</button>
                     </div>
                 </div>
             </form>
