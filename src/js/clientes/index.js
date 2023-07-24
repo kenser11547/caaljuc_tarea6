@@ -1,5 +1,5 @@
 const formulario = document.querySelector('form')
-const tablaProductos = document.getElementById('tablaProductos');
+const tablaClientes = document.getElementById('tablaClientes');
 const btnBuscar = document.getElementById('btnBuscar');
 const btnModificar = document.getElementById('btnModificar');
 const btnEliminar = document.getElementById('btnEliminar');
@@ -15,7 +15,11 @@ btnCancelar.parentElement.style.display = 'none'
 const guardar = async (evento) => {
     evento.preventDefault();
     if(!validarFormulario(formulario, ['cliente_id'])){
-        alert('Debe llenar todos los campos');
+        Swal.fire({
+            icon: 'warning',
+            title: 'error',
+            text:'debe llenar todos los campos',
+        });
         return 
     }
 
@@ -49,16 +53,26 @@ const guardar = async (evento) => {
                 break;
         }
 
-        alert(mensaje);
+        Swal.fire({
+            icon: 'success',
+            title: 'exito',
+            text:mensaje,
+        });
 
     } catch (error) {
         console.log(error);
     }
 }
+
+
 const modificar = async (evento) => {
     evento.preventDefault();
     if (!validarFormulario(formulario, ['cliente_id'])) {
-        alert('Debe llenar todos los campos');
+        Swal.fire({
+            icon: 'warning',
+            title: 'error',
+            text:'debe llenar todos los campos',
+        });
         return;
     }
 
@@ -91,7 +105,11 @@ const modificar = async (evento) => {
                 break;
         }
 
-        alert(mensaje);
+        Swal.fire({
+            icon: 'success',
+            title: 'exito',
+            text:mensaje,
+        });
         cancelarAccion();
 
     } catch (error) {
@@ -99,11 +117,14 @@ const modificar = async (evento) => {
     }
 }
 const eliminar = async (cliente_id) => {
-    const confirmacion = confirm("¿Estás seguro de que deseas eliminar este registro?");
-    if (!confirmacion) {
-        return;
-    }
+    const confirmacion = await Swal.fire({
+        icon: 'question',
+        title: '¿Estás seguro?',
+        text: '¿Deseas eliminar este registro?',
+        showCancelButton: true,
+    });
 
+    if (confirmacion.isConfirmed) {
     const url = `/caaljuc_tarea6/controladores/clientes/index.php`;
     const body = new FormData();
     body.append('cliente_id', cliente_id);
@@ -134,10 +155,15 @@ const eliminar = async (cliente_id) => {
                 break;
         }
 
-        alert(mensaje);
+        Swal.fire({
+            icon: 'success',
+            title: 'exito',
+            text:mensaje,
+        });
     } catch (error) {
         console.log(error);
     }
+}
 };
 const buscar = async () => {
 
@@ -152,7 +178,7 @@ const buscar = async () => {
         const respuesta = await fetch(url, config)
         const data = await respuesta.json();
         
-        tablaProductos.tBodies[0].innerHTML = ''
+        tablaClientes.tBodies[0].innerHTML = ''
         const fragment = document.createDocumentFragment();
         console.log(data);
         if(data.length > 0){
@@ -204,7 +230,7 @@ const buscar = async () => {
             fragment.appendChild(tr);
         }
 
-        tablaProductos.tBodies[0].appendChild(fragment)
+        tablaClientes.tBodies[0].appendChild(fragment)
     } catch (error) {
         console.log(error);
     }
@@ -239,13 +265,8 @@ const cancelarAccion = () => {
 }
 
 
-
-
-
-
-
-
 buscar();
+
 btnGuardar.addEventListener('click', guardar);
 btnModificar.addEventListener('click', modificar);
 btnEliminar.addEventListener('click', eliminar);

@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
+    <title>TAREA 6</title>
+</head>
+<body>
 <?php include_once '../../includes/header.php'?>
 <?php include_once '../../includes/navbar.php'?>
     <div class="container">
@@ -36,7 +45,7 @@
         <div class="row justify-content-center" id="divTabla">
             <div class="col-lg-8">
                 <h2>Listado de los Clientes</h2>
-                <table class="table table-bordered table-hover" id="tablaProductos">
+                <table class="table table-bordered table-hover" id="tablaClientes">
                     <thead class="table-dark">
                         <tr>
                             <th>NO. </th>
@@ -55,3 +64,5 @@
     <script src="../../src/js/funciones.js"></script>
     <script src="../../src/js/clientes/index.js"></script>
 <?php include_once '../../includes/footer.php'?>
+</body>
+</html>
