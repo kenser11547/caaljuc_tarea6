@@ -54,6 +54,55 @@ const guardar = async (evento) => {
         console.log(error);
     }
 }
+const modificar = async (evento) => {
+    evento.preventDefault();
+    if (!validarFormulario(formulario, ['cliente_id'])) {
+        alert('Debe llenar todos los campos');
+        return;
+    }
+
+    const cliente_id = formulario.cliente_id.value;
+    const body = new FormData(formulario);
+    body.append('tipo', 2);
+    const url = `/caaljuc_tarea6/controladores/clientes/index.php?cliente_id=${cliente_id}`;
+    const config = {
+        method: 'POST',
+        body,
+    };
+
+    try {
+        const respuesta = await fetch(url, config);
+        const data = await respuesta.json();
+
+        const { codigo, mensaje, detalle, cliente_actualizado } = data;
+
+        switch (codigo) {
+            case 1:
+                if (cliente_actualizado) {
+                    const row = tablaProductos.tBodies[0].querySelector(`[data-cliente-id="${cliente_id}"]`);
+                    const tds = row.querySelectorAll('td');
+                    tds[1].innerText = formulario.cliente_nombre.value;
+                    tds[2].innerText = formulario.cliente_nit.value;
+                }
+
+                formulario.reset();
+                break;
+
+            case 0:
+                console.log(detalle);
+                break;
+
+            default:
+                break;
+        }
+
+        alert(mensaje);
+        cancelarAccion();
+
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 const buscar = async () => {
 
